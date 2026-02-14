@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import WelcomeScreen from "./Welcome/Welcome";
-import Home from "./main/Home"
+import Home from "./main/Home";
 import EuphoricRegistration from "./Registration/Form";
 // import AdminDashboard from "./Admin/Dashboard";
 import ProtectedAdminDashboard from "./Admin/protected";
