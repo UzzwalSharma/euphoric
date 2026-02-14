@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function EventsBento() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -409,7 +410,10 @@ export default function EventsBento() {
   group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
   <span className="relative z-10 flex items-center gap-3">
+    <Link to="/register" className="flex items-center gap-3">
     Register Now <span className="text-xl">→</span>
+    </Link>
+    
   </span>
 </motion.button>
 
