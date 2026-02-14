@@ -333,7 +333,7 @@ export default function EventsBento() {
   };
 
   return (
-    <section className="relative min-h-screen w-full py-20 md:py-32 bg-black overflow-hidden">
+    <section className="relative min-h-screen w-full py-20 md:py-32 bg-black overflow-hidden " id="eventsSection">
       <div className="absolute inset-0 bg-black" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <motion.div

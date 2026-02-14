@@ -10,7 +10,7 @@ function Home() {
      <Hero />
      <About />
      <InfoTapes/>
-     <EventsShowcase/>
+     <EventsShowcase />
      <GlimpsesCarousel/>
     
     </div>

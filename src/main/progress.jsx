@@ -1,38 +1,41 @@
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform, useMotionValueEvent } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export default function ScrollProgress() {
   const [isVisible, setIsVisible] = useState(false);
+  const [progressValue, setProgressValue] = useState(0);
+
   const { scrollYProgress } = useScroll();
-  
-  // Smooth spring animation for the progress
+
+  // Smooth spring animation for progress
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
-  // Transform progress to circle path (0 to 1 becomes 0 to 283 - circumference of circle)
+  // Transform for SVG path animation (0 → 1)
   const pathLength = useTransform(smoothProgress, [0, 1], [0, 1]);
+
+  // Subscribe to motion value changes (FIXED)
+  useMotionValueEvent(smoothProgress, "change", (latest) => {
+    setProgressValue(Math.round(latest * 100));
+  });
 
   // Show/hide based on scroll position
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest > 0.05) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(latest > 0.05);
     });
 
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  // Scroll to top function
+  // Scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
@@ -41,16 +44,11 @@ export default function ScrollProgress() {
       initial={{ opacity: 0, scale: 0 }}
       animate={{
         opacity: isVisible ? 1 : 0,
-        scale: isVisible ? 1 : 0
+        scale: isVisible ? 1 : 0,
       }}
-      transition={{
-        duration: 0.3,
-        ease: "easeOut"
-      }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed bottom-6 right-6 z-50"
-      style={{
-        pointerEvents: isVisible ? "auto" : "none"
-      }}
+      style={{ pointerEvents: isVisible ? "auto" : "none" }}
     >
       <motion.button
         onClick={scrollToTop}
@@ -60,7 +58,6 @@ export default function ScrollProgress() {
       >
         {/* Inner circle */}
         <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-          {/* Arrow up icon */}
           <motion.svg
             className="w-5 h-5 text-white"
             fill="none"
@@ -92,25 +89,21 @@ export default function ScrollProgress() {
             strokeWidth="2"
             fill="none"
           />
-          
-          {/* Progress circle */}
-   
-<motion.circle
-  cx="25"
-  cy="25"
-  r="22"
-  stroke="url(#gradient)"
-  strokeWidth="2.5"
-  fill="none"
-  strokeLinecap="round"
-  strokeDasharray="138.23 138.23"
-  strokeDashoffset={0}
-  style={{
-    pathLength: pathLength,
-  }}
-/>
-          
-          {/* Gradient definition */}
+
+          {/* Animated progress circle */}
+          <motion.circle
+            cx="25"
+            cy="25"
+            r="22"
+            stroke="url(#gradient)"
+            strokeWidth="2.5"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray="138.23 138.23"
+            style={{ pathLength }}
+          />
+
+          {/* Gradient */}
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#a855f7" />
@@ -120,28 +113,29 @@ export default function ScrollProgress() {
           </defs>
         </svg>
 
-        {/* Glow effect on hover */}
+        {/* Glow hover effect */}
         <motion.div
           className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-0 group-hover:opacity-50 blur-xl transition-opacity pointer-events-none"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{
             duration: 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
       </motion.button>
 
-      {/* Percentage text (optional) */}
+      {/* Percentage label */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
+        animate={{
+          opacity: isVisible ? 1 : 0,
+          y: isVisible ? 0 : 10,
+        }}
         transition={{ delay: 0.2 }}
         className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded text-white text-xs belanosima-bold whitespace-nowrap"
       >
-        {Math.round(smoothProgress.get() * 100)}%
+        {progressValue}%
       </motion.div>
     </motion.div>
   );
