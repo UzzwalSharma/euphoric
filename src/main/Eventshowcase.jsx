@@ -334,7 +334,10 @@ export default function EventsBento() {
   };
 
   return (
-    <section className="relative min-h-screen w-full py-20 md:py-32 bg-black overflow-hidden " id="eventsSection">
+    <section
+      className="relative min-h-screen w-full py-20 md:py-32 bg-black overflow-hidden "
+      id="eventsSection"
+    >
       <div className="absolute inset-0 bg-black" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <motion.div
@@ -396,27 +399,27 @@ export default function EventsBento() {
           className="flex justify-center mb-16"
         >
           <motion.button
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="relative overflow-hidden px-10 py-4 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="relative overflow-hidden px-10 py-4 
   bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600
   text-white font-black text-base md:text-lg 
   rounded-sm belanosima-bold cursor-pointer 
   flex items-center gap-3 group"
->
-  {/* Shine Sweep */}
-  <span className="absolute inset-0 -translate-x-full 
+          >
+            {/* Shine Sweep */}
+            <span
+              className="absolute inset-0 -translate-x-full 
   bg-gradient-to-r from-transparent via-white/40 to-transparent 
-  group-hover:translate-x-full transition-transform duration-700 ease-out" />
+  group-hover:translate-x-full transition-transform duration-700 ease-out"
+            />
 
-  <span className="relative z-10 flex items-center gap-3">
-    <Link to="/register" className="flex items-center gap-3">
-    Register Now <span className="text-xl">→</span>
-    </Link>
-    
-  </span>
-</motion.button>
-
+            <span className="relative z-10 flex items-center gap-3">
+              <Link to="/register" className="flex items-center gap-3">
+                Register Now <span className="text-xl">→</span>
+              </Link>
+            </span>
+          </motion.button>
         </motion.div>
 
         <motion.div
