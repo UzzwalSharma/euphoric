@@ -6,13 +6,25 @@ const gradientTextStyle = `
 .curved-text-container {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+@media (min-width: 640px) {
+  .curved-text-container {
+    height: 220px;
+  }
+}
+
 @media (min-width: 768px) {
+  .curved-text-container {
+    height: 260px;
+  }
+}
+
+@media (min-width: 1024px) {
   .curved-text-container {
     height: 300px;
   }
@@ -20,14 +32,19 @@ const gradientTextStyle = `
 
 .euphoric-outline {
   color: transparent;
-  -webkit-text-stroke: 2px rgba(255,255,255,0.6);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.6);
+}
+
+@media (min-width: 768px) {
+  .euphoric-outline {
+    -webkit-text-stroke: 2px rgba(255,255,255,0.6);
+  }
 }
 
 .euphoric-fill {
   color: white;
 }
 `;
-
 
 export default function Welcome() {
   const [showIntro, setShowIntro] = useState(true);
@@ -67,10 +84,19 @@ export default function Welcome() {
     const text = "EUPHORIC";
     const letters = text.split("");
     const totalLetters = letters.length;
-   const colors = ['#00f5ff', '#7b2ff7', '#f72585', '#ff6d00', '#ffd60a', '#00f5ff'];
+    const colors = ['#00f5ff', '#7b2ff7', '#f72585', '#ff6d00', '#ffd60a', '#00f5ff'];
     
-    // Calculate spacing between letters for horizontal layout
-    const letterSpacing = window.innerWidth < 768 ? 45 : 65; // Adjust based on screen size
+    // Responsive letter spacing
+    const getLetterSpacing = () => {
+      if (typeof window === 'undefined') return 45;
+      const width = window.innerWidth;
+      if (width < 640) return 32; // Mobile
+      if (width < 768) return 45; // Small tablet
+      if (width < 1024) return 55; // Tablet
+      return 65; // Desktop
+    };
+
+    const letterSpacing = getLetterSpacing();
     const totalWidth = (totalLetters - 1) * letterSpacing;
     
     return letters.map((letter, i) => {
@@ -90,9 +116,7 @@ export default function Welcome() {
       return (
         <motion.span
           key={i}
-          className={`bungee absolute text-6xl md:text-8xl ${isFilled ? 'euphoric-fill' : 'euphoric-outline'}
-
-          }`}
+          className={`bungee absolute text-4xl sm:text-5xl md:text-7xl lg:text-8xl ${isFilled ? 'euphoric-fill' : 'euphoric-outline'}`}
           style={{
             left: '50%',
             top: '50%',
@@ -149,9 +173,9 @@ export default function Welcome() {
   };
 
   return (
-    <div className="w-full h-screen bg-black p-2 md:p-4 lg:p-2">
-      <div className="relative w-full h-full overflow-hidden border border-white/40 rounded-md md:rounded-md lg:rounded-md">
-        <div className="absolute inset-0 md:rounded-2xl lg:rounded-3xl border border-white pointer-events-none"></div>
+    <div className="w-full h-screen bg-black p-1 sm:p-2 md:p-3 lg:p-2">
+      <div className="relative w-full h-full overflow-hidden border border-white/40 rounded-sm sm:rounded-md md:rounded-lg lg:rounded-xl">
+        <div className="absolute inset-0 rounded-sm sm:rounded-md md:rounded-lg lg:rounded-xl border border-white pointer-events-none"></div>
         <style>{gradientTextStyle}</style>
 
         {/* ---------------- INTRO GIF ---------------- */}
@@ -166,14 +190,14 @@ export default function Welcome() {
               <img
                 src="/bowler.gif"
                 alt="Bowler Throw"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-sm sm:rounded-md md:rounded-lg lg:rounded-xl"
               />
             </motion.div>
           )}
         </AnimatePresence>
 
         <motion.div
-          className="absolute left-8 md:left-16 top-1/4 "
+          className="absolute left-4 sm:left-6 md:left-8 lg:left-16 top-1/4"
           initial={{ x: -100, opacity: 0 }}
           animate={{
             x: showIntro ? -100 : 0,
@@ -196,14 +220,14 @@ export default function Welcome() {
         </motion.div>
 
         {/* ---------------- MAIN TEXT ---------------- */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-3 sm:px-4 md:px-6">
           {/* SGIT */}
           <motion.h1
             initial={{ scale: 0, rotate: -10 }}
             animate={{ scale: showIntro ? 0 : 1, rotate: showIntro ? -10 : 0 }}
             transition={{ type: "spring", stiffness: 120, delay: 0.2 }}
-            className="text-5xl md:text-7xl bungee tracking-wide gradient-text text-white"
-            style={{ marginTop: '-80px' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl bungee tracking-wide gradient-text text-white mb-2 sm:mb-0"
+            style={{ marginTop: '-60px' }}
           >
             SGIT's
           </motion.h1>
@@ -231,7 +255,7 @@ export default function Welcome() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.9, ease: "easeOut" }}
-                className="text-lg md:text-2xl text-gray-200 mt-4 tracking-wide font-light belanosima-semibold"
+                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-200 mt-2 sm:mt-3 md:mt-4 tracking-wide font-light belanosima-semibold px-4 sm:px-6 md:px-8"
               >
                 Welcome to the carnival of sound and sensations!
               </motion.p>
@@ -243,9 +267,9 @@ export default function Welcome() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="w-64 md:w-80 mt-8"
+              className="w-48 sm:w-56 md:w-64 lg:w-80 mt-4 sm:mt-6 md:mt-8"
             >
-              <div className="text-[35px] text-white/80 mb-2 belanosima-semibold tracking-wide">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-[35px] text-white/80 mb-2 belanosima-semibold tracking-wide">
                 <motion.span
                   animate={{
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -265,7 +289,7 @@ export default function Welcome() {
                 >
                   LOADING
                 </motion.span>
-                <div className="text-white">{Math.round(loading)}%</div>
+                <div className="text-white text-xl sm:text-2xl md:text-3xl">{Math.round(loading)}%</div>
               </div>
             </motion.div>
           )}
@@ -285,8 +309,9 @@ export default function Welcome() {
                     scale: 1.05,
                     boxShadow: "0 0 30px rgba(255, 255, 255, 0.3)",
                   }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.6, type: "spring" }}
-                  className="mt-8 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white rounded-sm text-white tracking-wider hover:bg-white/20 transition-all duration-300 belanosima-semibold cursor-pointer"
+                  className="mt-4 sm:mt-6 md:mt-8 px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-sm border border-white rounded-sm text-white text-sm sm:text-base md:text-lg tracking-wider hover:bg-white/20 transition-all duration-300 belanosima-semibold cursor-pointer"
                 >
                   ENTER FEST →
                 </motion.button>
@@ -305,11 +330,11 @@ export default function Welcome() {
           <img
             src="https://i.pinimg.com/1200x/17/11/82/171182d06f9b24a182772580ea7fae2b.jpg"
             alt="Crowd"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-sm sm:rounded-md md:rounded-lg lg:rounded-xl"
           />
 
           {/* Dark cinematic overlay for text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40 rounded-sm sm:rounded-md md:rounded-lg lg:rounded-xl"></div>
         </motion.div>
       </div>
     </div>
