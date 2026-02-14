@@ -229,7 +229,7 @@ export default function Hero() {
       {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
-        src="/m.mp3" // Add your music file to public folder
+        src="/m1.mp3" // Add your music file to public folder
         loop
         preload="auto"
       />
