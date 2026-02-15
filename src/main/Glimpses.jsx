@@ -354,7 +354,7 @@ export default function GlimpsesCarousel() {
             by
           </span>{" "}
           <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-purple-600 bg-clip-text text-transparent belanosima-bold text-lg sm:text-xl md:text-2xl">
-            Ujjwal
+            Ujjwal Sharma
           </span>
         </p>
       </motion.div>

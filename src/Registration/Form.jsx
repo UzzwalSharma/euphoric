@@ -749,7 +749,7 @@ export default function EuphoricRegistration() {
           </p>
           <p className="text-white/40 belanosima-regular text-xs flex items-center justify-center gap-1.5">
             Made with <span className="text-red-400">❤️</span> by{" "}
-            <span className="text-white/60">Ujjwal</span>
+            <span className="text-white/60">Ujjwal Sharma</span>
           </p>
         </div>
       </div>
