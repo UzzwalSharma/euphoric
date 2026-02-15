@@ -166,7 +166,7 @@ export default function EventsBento() {
       name: "Rangoli Making",
       category: "Cultural",
       image:
-        "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=800&q=80",
+        "https://static.vecteezy.com/system/resources/thumbnails/037/375/497/small/ai-generated-cultural-splendor-immerse-yourself-in-the-vibrancy-of-indian-celebrations-free-photo.jpg",
     },
     {
       name: "Relay Race (100x4 M)",
