@@ -155,7 +155,7 @@ export default function About() {
                 </h3>
               </div>
               <p className="text-red-300 text-xl md:text-2xl belanosima-bold mt-3">
-                15th March, 2026
+                7th March, 2026
               </p>
               <p className="text-gray-300 text-sm mt-2 belanosima-regular">
                 Don't miss your chance to participate!

@@ -397,15 +397,15 @@ export default function Hero() {
         className="absolute top-3 left-3 sm:top-4 sm:left-4 md:top-6 md:left-6 lg:top-8 lg:left-8 z-20"
       >
         <div className="flex flex-col text-white/90">
-          <span className="text-xs sm:text-sm md:text-base lg:text-xl opacity-70 tracking-wider belanosima-bold">
-            Coming
+          <span className="text-lg sm:text-sm md:text-base lg:text-xl opacity-70 tracking-wider belanosima-bold">
+            7th March
           </span>
           <motion.span
             className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold"
             whileHover={{ scale: 1.05, color: "#ffffff" }}
             transition={{ duration: 0.2 }}
           >
-            Soon...
+            2026
           </motion.span>
         </div>
       </motion.div>
@@ -420,7 +420,7 @@ export default function Hero() {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="mb-3 sm:mb-4 md:mb-6"
           >
-            <h2 className="text-white/80 text-[0.6rem] sm:text-xs md:text-sm lg:text-base tracking-[0.3em] sm:tracking-[0.4em] md:tracking-[0.5em] uppercase belanosima-semibold">
+            <h2 className="text-white/80 text-[0.6rem] sm:text-lg md:text-lg lg:text-base tracking-[0.3em] sm:tracking-[0.4em] md:tracking-[0.5em] uppercase belanosima-semibold">
               SGIT Presents
             </h2>
           </motion.div>

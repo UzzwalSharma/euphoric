@@ -5,6 +5,8 @@ import EuphoricRegistration from "./Registration/Form";
 // import AdminDashboard from "./Admin/Dashboard";
 import ProtectedAdminDashboard from "./Admin/protected";
 import ScrollProgress from "./main/progress";
+import EuphoricRegistrationgform from "./Registration/Gform";
+import Gform from "./Registration/Gform";
 
 function AppContent() {
   const location = useLocation();
@@ -18,7 +20,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<WelcomeScreen />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<EuphoricRegistration />} />
+        <Route path="/register" element={<Gform />} />
         <Route path="/admin" element={<ProtectedAdminDashboard />} />
         <Route path="*" element={<h1 className="text-center mt-20 text-3xl text-white">404 - Page Not Found</h1>} />
       </Routes>
